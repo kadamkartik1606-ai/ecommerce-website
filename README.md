@@ -32,7 +32,7 @@ Welcome to our e-commerce project! This project is a fully functional website de
 
 This project is hosted on GitHub, making it easy to explore and use. The repository is organized with clear folder structures.
 
-### [[Link to GitHub Repository](https://github.com/NikhilSaw/E-Commerse-Website)](#)
+### [(https://github.com/kadamkartik1606-ai/ecommerce-website)](#)
 
 ## Usage
 
