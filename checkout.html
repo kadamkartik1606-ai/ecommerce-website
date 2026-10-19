@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - UrbanCraze</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./Images&Logo/Logo/main_logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <style>
+        .checkout-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .form-section h2,
+        .order-summary h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #088178;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cce7d0;
+            border-radius: 5px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #088178;
+            box-shadow: 0 0 5px rgba(8, 129, 120, 0.3);
+        }
+
+        .order-summary {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .summary-item:last-of-type {
+            border-bottom: 2px solid #088178;
+            font-weight: 600;
+            padding: 15px 0;
+            font-size: 18px;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            background: #088178;
+            color: white;
+            border: none;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-checkout:hover {
+            background: #066956;
+        }
+
+        .btn-checkout:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-content {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: relative;
+                top: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="navbar">
+        <a href="index.html"><img src="./Images&Logo/Logo/main_logo.png" alt="" style="width: 85%; padding-left: 45px;"></a>
+        <div>
+            <ul id="nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="fa-duotone fa-bag-shopping"></i></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="page-header">
+        <h2>Checkout</h2>
+        <p>Complete your purchase</p>
+    </section>
+
+    <div class="checkout-container">
+        <div class="success-message" id="successMessage"></div>
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="checkout-content">
+            <!-- Checkout Form -->
+            <div class="form-section">
+                <h2>Delivery Information</h2>
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label for="customerName">Full Name *</label>
+                        <input type="text" id="customerName" name="customerName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerEmail">Email Address *</label>
+                        <input type="email" id="customerEmail" name="customerEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number</label>
+                        <input type="tel" id="customerPhone" name="customerPhone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerAddress">Delivery Address *</label>
+                        <textarea id="customerAddress" name="customerAddress" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-checkout" id="submitBtn">Place Order</button>
+                </form>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <div id="summaryItems"></div>
+                <div style="background:white; padding:15px; border-radius:5px; margin-top:15px;">
+                    <div class="summary-item">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₹0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Shipping:</span>
+                        <span id="shipping">₹0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Total:</span>
+                        <span id="totalPrice">₹0.00</span>
+                    </div>
+                </div>
+                <button class="btn-checkout" onclick="window.location.href='cart.html'">Back to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./cart.js"></script>
+    <script>
+        // Load cart items and display summary
+        function loadOrderSummary() {
+            const summaryItems = document.getElementById('summaryItems');
+            summaryItems.innerHTML = '';
+
+            cart.items.forEach((item, index) => {
+                const itemTotal = (item.price * item.quantity).toFixed(2);
+                const itemHtml = `
+                    <div class="summary-item" style="border:none; display:flex; justify-content:space-between; padding:10px; background:white; margin-bottom:10px; border-radius:3px;">
+                        <span>${item.quantity}x ${item.name}</span>
+                        <span>₹${itemTotal}</span>
+                    </div>
+                `;
+                summaryItems.innerHTML += itemHtml;
+            });
+
+            const subtotal = cart.getTotalPrice().toFixed(2);
+            const shipping = 0; // Free shipping
+            const total = (parseFloat(subtotal) + parseFloat(shipping)).toFixed(2);
+
+            document.getElementById('subtotal').textContent = '₹' + subtotal;
+            document.getElementById('shipping').textContent = '₹' + shipping;
+            document.getElementById('totalPrice').textContent = '₹' + total;
+        }
+
+        loadOrderSummary();
+
+        // Handle form submission
+        document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+
+            const orderData = {
+                customerName: document.getElementById('customerName').value,
+                customerEmail: document.getElementById('customerEmail').value,
+                customerPhone: document.getElementById('customerPhone').value,
+                customerAddress: document.getElementById('customerAddress').value,
+                items: cart.items,
+                totalPrice: cart.getTotalPrice()
+            };
+
+            const result = await orderManager.placeOrder(orderData);
+
+            if (result.success) {
+                document.getElementById('successMessage').textContent = `✓ ${result.message} Your Order ID: ${result.orderId}`;
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('errorMessage').style.display = 'none';
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                document.getElementById('errorMessage').textContent = '✗ ' + result.message;
+                document.getElementById('errorMessage').style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Place Order';
+            }
+        });
+
+        // Redirect to cart if cart is empty
+        if (cart.items.length === 0) {
+            alert('Your cart is empty! Please add items first.');
+            window.location.href = 'cart.html';
+        }
+    </script>
+</body>
+
+</html>

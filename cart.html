@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - UrbanCraze</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./Images&Logo/Logo/main_logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+</head>
+
+<body>
+    <section id="navbar">
+        <a href="index.html"><img src="./Images&Logo/Logo/main_logo.png" alt="" style="width: 85%; padding-left: 45px;"></a>
+        <div>
+            <ul id="nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li id="lg-bag"><a href="cart.html" class="active"><i class="fa-duotone fa-bag-shopping"></i></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="page-header">
+        <h2>Shopping Cart</h2>
+        <p>Review your selected items</p>
+    </section>
+
+    <section id="cart" class="section-p1">
+        <div class="cart-items"></div>
+        <div class="cart-summary"></div>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="shop.html" class="normal" style="text-decoration:none; background:#088178; color:white; padding:15px 30px; border-radius:5px; display:inline-block;">← Continue Shopping</a>
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <h4>Contact</h4>
+            <p><strong>Phone</strong> +91-8356962272</p>
+            <p><strong>Hours</strong> 10:00 - 18:00, Mon - Sat</p>
+        </div>
+    </footer>
+
+    <script src="./cart.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            cart.displayCart();
+        });
+    </script>
+</body>
+
+</html>
